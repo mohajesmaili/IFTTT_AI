@@ -6,23 +6,23 @@
     <meta name="description" content="">
     <meta name="author" content="Mosaddek">
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <link rel="shortcut icon" href="img/favicon.html">
+    <link rel="shortcut icon" href="<?php echo base_url() ?>img/favicon.html">
 
     <title>Widget</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-reset.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="<?php echo base_url() ?>assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/style-responsive.css" rel="stylesheet" />
+    <link href="<?php echo base_url() ?>css/style.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>css/style-responsive.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
+    <script src="<?php echo base_url() ?>js/html5shiv.js"></script>
+    <script src="<?php echo base_url() ?>js/respond.min.js"></script>
     <![endif]-->
 </head>
 
@@ -282,7 +282,7 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu">
                 <li class="sub-menu">
-                    <a class="" href="/home">
+                    <a class="" href="<?php echo base_url('index.php/');?>">
                         <i class="icon-dashboard"></i>
                         <span>صفحه اصلی</span>
                     </a>
@@ -294,7 +294,7 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li class="active"><a class="" href="/list">لیست خدمات</a></li>
+                        <li class="active"><a class="" href="<?php echo base_url('index.php/');?>Home/show_list">لیست خدمات</a></li>
                     </ul>
                 </li>
             </ul>
@@ -309,7 +309,7 @@
             <div class="row">
                 <div   style="text-align: center" class="col-lg-12">
                     <div class="row">
-                        <?php foreach ($service as $services){ ?>
+                        <?php foreach ($list as $services){ ?>
                         <div class="col-lg-6">
                             <!--widget start-->
                             <section class="panel">
@@ -317,7 +317,7 @@
                                     <h1><?php  echo $services->name; ?> </h1>
                                     <p>ساخته شده توسط ادمین</p>
                                     <a href="#">
-                                        <img src="img/profile-avatar.jpg" alt="">
+                                        <img src="<?php echo base_url() ?>img/profile-avatar.jpg" alt="">
                                     </a>
                                 </div>
                                 <div class="weather-category twt-category">
@@ -343,15 +343,15 @@
 </section>
 
 <!-- js placed at the end of the document so the pages load faster -->
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
-<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
-<script src="assets/jquery-knob/js/jquery.knob.js"></script>
+<script src="<?php echo base_url() ?>js/jquery.js"></script>
+<script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
+<script src="<?php echo base_url() ?>js/jquery.scrollTo.min.js"></script>
+<script src="<?php echo base_url() ?>js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="<?php echo base_url() ?>assets/jquery-knob/js/jquery.knob.js"></script>
 
 
 <!--common script for all pages-->
-<script src="js/common-scripts.js"></script>
+<script src="<?php echo base_url() ?>js/common-scripts.js"></script>
 
 <script>
 

@@ -14,4 +14,8 @@ class Home_model extends CI_Model {
 		$login=$this->db->get('users');
 		return $login->result_array();
 	}
+	public function get_list(){
+	$login=$this->db->get('service');
+	return $login->result();
+}
 }

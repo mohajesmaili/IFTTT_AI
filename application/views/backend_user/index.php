@@ -5,27 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Mosaddek">
-	<script type="text/javascript" src="http://dl.20script.ir/img/website.js"></script>
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <link rel="shortcut icon" href="img/favicon.html">
+    <link rel="shortcut icon" href="<?php echo base_url() ?>img/favicon.html">
 
     <title>FlatLab - Flat & Responsive Bootstrap Admin Template</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-reset.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+    <link href="<?php echo base_url() ?>assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="<?php echo base_url() ?>assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="<?php echo base_url() ?>css/owl.carousel.css" type="text/css">
     <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/style-responsive.css" rel="stylesheet" />
+    <link href="<?php echo base_url() ?>css/style.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>css/style-responsive.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
+      <script src="<?php echo base_url() ?>js/html5shiv.js"></script>
+      <script src="<?php echo base_url() ?>js/respond.min.js"></script>
     <![endif]-->
   </head>
 
@@ -257,7 +256,7 @@
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <img alt="" src="img/avatar1_small.jpg">
-                            <span class="username">{{ Auth::user()->name }}</span>
+                            <span class="username"></span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -265,10 +264,7 @@
                             <li><a href="#"><i class=" icon-suitcase"></i>پروفایل</a></li>
                             <li><a href="#"><i class="icon-cog"></i> تنظیمات</a></li>
                             <li><a href="#"><i class="icon-bell-alt"></i> اعلام ها</a></li>
-                            <form id=" logout-form" action="{{ route('logout') }}" method="POST" >
-                                @csrf
-                                <li><button><i class="icon-key"></i> خروج</button></li>
-                            </form>
+                            <li><a href="#"><i class="icon-key"></i> خروج</a></li>
                         </ul>
                     </li>
                     <!-- user login dropdown end -->
@@ -283,7 +279,7 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">
                   <li class="active">
-                      <a class="" href="/home">
+                      <a class="" href="<?php echo base_url('index.php/');?>">
                           <i class="icon-dashboard"></i>
                           <span>صفحه اصلی</span>
                       </a>
@@ -295,7 +291,7 @@
                           <span class="arrow"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="/list">لیست خدمات</a></li>
+                          <li><a class="" href="<?php echo base_url('index.php/');?>Home/show_list">لیست خدمات</a></li>
                       </ul>
                   </li>
               </ul>
@@ -971,22 +967,22 @@
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery-1.8.3.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.scrollTo.min.js"></script>
-    <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="js/jquery.sparkline.js" type="text/javascript"></script>
-    <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
-    <script src="js/owl.carousel.js" ></script>
-    <script src="js/jquery.customSelect.min.js" ></script>
+    <script src="<?php echo base_url() ?>js/jquery.js"></script>
+    <script src="<?php echo base_url() ?>js/jquery-1.8.3.min.js"></script>
+    <script src="<?php echo base_url() ?>js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url() ?>js/jquery.scrollTo.min.js"></script>
+    <script src="<?php echo base_url() ?>js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="<?php echo base_url() ?>js/jquery.sparkline.js" type="text/javascript"></script>
+    <script src="<?php echo base_url() ?>assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+    <script src="<?php echo base_url() ?>js/owl.carousel.js" ></script>
+    <script src="<?php echo base_url() ?>js/jquery.customSelect.min.js" ></script>
 
     <!--common script for all pages-->
-    <script src="js/common-scripts.js"></script>
+    <script src="<?php echo base_url() ?>js/common-scripts.js"></script>
 
     <!--script for this page-->
-    <script src="js/sparkline-chart.js"></script>
-    <script src="js/easy-pie-chart.js"></script>
+    <script src="<?php echo base_url() ?>js/sparkline-chart.js"></script>
+    <script src="<?php echo base_url() ?>js/easy-pie-chart.js"></script>
 
   <script>
 

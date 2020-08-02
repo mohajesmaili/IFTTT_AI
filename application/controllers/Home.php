@@ -26,4 +26,9 @@ class Home extends CI_Controller {
 			}
 		}
 	}
+
+	public function show_list(){
+		$data['list']=$this->Home_model->get_list();
+		return $this->load->view('backend_user/list',$data);
+	}
 }
