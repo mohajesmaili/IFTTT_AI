@@ -292,7 +292,8 @@
                       </a>
                       <ul class="sub">
                           <li><a class="" href="<?php echo base_url('index.php/');?>Home/show_list">لیست خدمات</a></li>
-                      </ul>
+						  <li><a class="" href="<?php echo base_url('index.php/');?>Home/show_service">لیست سرویس </a></li>
+					  </ul>
                   </li>
               </ul>
               <!-- sidebar menu end-->

@@ -294,8 +294,8 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li class="active"><a class="" href="<?php echo base_url('index.php/');?>Home/show_list">لیست خدمات</a></li>
-						<li><a class="" href="<?php echo base_url('index.php/');?>Home/show_service">لیست سرویس </a></li>
+                        <li ><a class="" href="<?php echo base_url('index.php/');?>Home/show_list">لیست خدمات</a></li>
+						<li class="active"><a class="" href="<?php echo base_url('index.php/');?>Home/show_service">لیست سرویس </a></li>
 					</ul>
                 </li>
             </ul>
@@ -310,12 +310,12 @@
             <div class="row">
                 <div   style="text-align: center" class="col-lg-12">
                     <div class="row">
-                        <?php foreach ($list as $services){ ?>
+                        <?php foreach ($show as $services){  ?>
                         <div class="col-lg-6">
                             <!--widget start-->
                             <section class="panel">
                                 <div class="twt-feed blue-bg">
-                                    <h1><?php  echo $services->name; ?> </h1>
+                                    <h1><?php  echo $services[0]->name; ?> </h1>
                                     <p>ساخته شده توسط ادمین</p>
                                     <a href="#">
                                         <img src="<?php echo base_url() ?>img/profile-avatar.jpg" alt="">
@@ -324,9 +324,9 @@
                                 <div class="weather-category twt-category">
                                 </div>
                                 <footer class="twt-footer" >
-                                    <a href="<?php echo base_url('index.php/') ?>Home/add_service/<?php echo $services->id; ?>"class="btn btn-space btn-info">
+                                    <a href="<?php echo base_url('index.php/') ?>Home/show_signle_service/<?php echo $services[0]->id; ?>"class="btn btn-space btn-info">
                                         <i class="icon-twitter"></i>
-                                        اضافه کردن سرویس
+                                       ادامه
                                     </a>
                                 </footer>
                             </section>
