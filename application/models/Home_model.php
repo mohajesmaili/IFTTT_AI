@@ -17,7 +17,15 @@ class Home_model extends CI_Model {
 		}
 		$login=$this->db->get('service');
 		return $login->result();
+
 	}
+	public function get_app($id=null){
+        if(!empty($id))	{
+            $this->db->where('id',$id);
+        }
+        $login=$this->db->get('application');
+        return $login->result();
+    }
 	public function add_services($id){
 		$data = array(
 			'service_id' => $id,
@@ -25,8 +33,7 @@ class Home_model extends CI_Model {
 			'app1_c' => 0,
 			'app1_c' => 0,
 		);
-		$insert = $this->db->insert('service_use', $data);
-		return $insert;
+		$this->db->insert('service_use', $data);
 	}
 	public function show_service(){
 		$this->db->where('user_id' , $_SESSION['user'][0]['id']);

@@ -63,6 +63,8 @@ class Home extends CI_Controller {
         $authenticate=$this->login();
         if ($authenticate == true) {
             $data['service'] = $this->Home_model->get($id);
+            $data['app1'] = $this->Home_model->get_app($data['service'][0]->app1_id);
+            $data['app2'] = $this->Home_model->get_app($data['service'][0]->app2_id);
             return $this->load->view('backend_user/show_service', $data);
         }
     }
