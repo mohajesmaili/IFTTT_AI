@@ -59,13 +59,16 @@ class Home extends CI_Controller {
             return $this->load->view('backend_user/my_list', $data);
         }
 	}
-	public function show_signle_service($id){
+	public function show_signle_service($id,$service_use_id){
         $authenticate=$this->login();
         if ($authenticate == true) {
+            $data['service_use_id']=$service_use_id;
             $data['service'] = $this->Home_model->get($id);
+            $data['service_use_connect'] = $this->Home_model->show_service($service_use_id);
             $data['app1'] = $this->Home_model->get_app($data['service'][0]->app1_id);
             $data['app2'] = $this->Home_model->get_app($data['service'][0]->app2_id);
             return $this->load->view('backend_user/show_service', $data);
         }
     }
-}
+	}
+	?>
