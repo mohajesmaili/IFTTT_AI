@@ -325,7 +325,6 @@
                                 </div>
                                 <footer class="twt-footer" >
                                     <a href="<?php echo base_url('index.php/') ?>Home/add_service/<?php echo $services->id; ?>"class="btn btn-space btn-info">
-                                        <i class="icon-twitter"></i>
                                         اضافه کردن سرویس
                                     </a>
                                 </footer>

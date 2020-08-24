@@ -310,7 +310,10 @@
             <div class="row">
                 <div   style="text-align: center" class="col-lg-12">
                     <div class="row">
-                        <?php foreach ($show as $services){  ?>
+                        <?php
+                        $i=0;
+                        foreach ($show as $services){
+                        ?>
                         <div class="col-lg-6">
                             <!--widget start-->
                             <section class="panel">
@@ -324,7 +327,7 @@
                                 <div class="weather-category twt-category">
                                 </div>
                                 <footer class="twt-footer" >
-                                    <a href="<?php echo base_url('index.php/') ?>Home/show_signle_service/<?php echo $services[0]->id; ?>"class="btn btn-space btn-info">
+                                    <a href="<?php echo base_url('index.php/') ?>Home/show_signle_service/<?php echo $services[0]->id; ?>/<?php echo $show_service[$i]->id; ?>"class="btn btn-space btn-info">
                                         <i class="icon-twitter"></i>
                                        ادامه
                                     </a>
@@ -332,7 +335,10 @@
                             </section>
                             <!--widget end-->
                         </div>
-                        <?php } ?>
+                        <?php
+                            $i++;
+                            }
+                        ?>
                     </div>
                 </div >
 
