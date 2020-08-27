@@ -72,26 +72,65 @@ class Instagram extends CI_Controller
             $long_a="https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret=$app_secret&access_token=".$_SESSION['Instagram_data']['access_token']."";
             $result= json_decode(file_get_contents($long_a),true);
             if(!empty($result)){
-               $update = $this->Home_model->update_user_service($_SESSION["service_use_id"],$result['access_token'],$_SESSION['Instagram_data']['user_id'],$_SESSION['service_app_id']);
-               if($update==true){
-                   echo "<script>alert('اتصال با موفقیت انجام شد')</script>";
-               }
+                $update = $this->Home_model->update_user_service($_SESSION["service_use_id"],$result['access_token'],$_SESSION['Instagram_data']['user_id'],$_SESSION['service_app_id']);
+                if($update==true){
+                    echo "<script>alert('اتصال با موفقیت انجام شد')</script>";
+                }
             }
         }
     }
-    public function get_media_id(){
-        $authenticate=$this->login();
-        if ($authenticate == true) {
-            $url='https://graph.instagram.com/me/media?fields=id,username&access_token='.$_SESSION["Instagram_data"]["access_token"].'';
-            $result= json_decode(file_get_contents($url),true);
-            return $result['data']['0']['id'];
+    public function get_single_media_id($service_app_id,$service_use_id){
+        $access_token = $this->Home_model->show_service($service_use_id);
+        if($service_app_id==1){
+            $url ='https://graph.instagram.com/me/media?fields=id,username&access_token='.$access_token[0]->app_1_token.'';
+        }elseif ($service_app_id==2){
+            $url ='https://graph.instagram.com/me/media?fields=id,username&access_token='.$access_token[0]->app_2_token.'';
         }
+        $result = json_decode(file_get_contents($url),true);
+        return $result['data']['0']['id'];
     }
-    public function get_media(){
-        $authenticate=$this->login();
-        if ($authenticate == true) {
-            $url='https://graph.instagram.com/'.$this->get_media_id().'?fields=id,media_type,media_url,username,timestamp&access_token='.$_SESSION["Instagram_data"]["access_token"].'';
-            echo $url;
+    public function get_signle_media($service_app_id,$service_use_id){
+        $access_token = $this->Home_model->show_service($service_use_id);
+        if($service_app_id==1){
+            $url='https://graph.instagram.com/'.$this->get_single_media_id($service_app_id,$service_use_id).'?fields=id,media_type,media_url,username,timestamp&access_token='.$access_token[0]->app_1_token.'';
+        }elseif ($service_app_id==2){
+            $url='https://graph.instagram.com/'.$this->get_single_media_id($service_app_id,$service_use_id).'?fields=id,media_type,media_url,username,timestamp&access_token='.$access_token[0]->app_2_token.'';
+        }
+        $result = json_decode(file_get_contents($url),true);
+        echo $result['media_url'];
+    }
+    public function get_media_id($service_app_id,$service_use_id){
+        $access_token = $this->Home_model->show_service($service_use_id);
+        if($service_app_id==1){
+            $url ='https://graph.instagram.com/me/media?fields=id,username&access_token='.$access_token[0]->app_1_token.'';
+        }elseif ($service_app_id==2){
+            $url ='https://graph.instagram.com/me/media?fields=id,username&access_token='.$access_token[0]->app_2_token.'';
+        }
+        $result = json_decode(file_get_contents($url),true);
+        $counter=count($result['data']);
+        $id_array=array();
+        for ($i=0;$i<$counter;$i++){
+            array_push($id_array,$result['data'][$i]['id']);
+        }
+        return $id_array;
+    }
+    public function get_media($service_app_id,$service_use_id){
+        $access_token = $this->Home_model->show_service($service_use_id);
+        $data=$this->get_media_id($service_app_id,$service_use_id);
+        $counter=count($data);
+        $link_array=array();
+        if($service_app_id == 1){
+            for ($i=0;$i<$counter;$i++) {
+                $url = 'https://graph.instagram.com/' .$data[$i]. '?fields=id,media_type,media_url,username,timestamp&access_token=' . $access_token[0]->app_1_token . '';
+                $result = json_decode(file_get_contents($url),true);
+                echo $result['media_url'].',';
+            }
+        }elseif ($service_app_id == 2){
+            for ($i=0;$i<$counter;$i++) {
+                $url='https://graph.instagram.com/' .$data[$i]. '?fields=id,media_type,media_url,username,timestamp&access_token='.$access_token[0]->app_2_token.'';
+                $result = json_decode(file_get_contents($url),true);
+                echo $result['media_url'].',';
+            }
         }
     }
 }

@@ -27,11 +27,17 @@ class Telegram_Api extends CI_Controller
             }
         }
     }
-    public function app_connect(){
+    public function app_connect($service_app_id,$service_use_id){
+        $file = fopen(__DIR__.'/data/Log.txt', "w");
+        fwrite($file, $service_app_id);
+        fwrite($file, "\n");
+        fwrite($file, $service_use_id);
+        fclose($file);
         $authenticate=$this->login();
         if ($authenticate == true) {
             $bot = new Telegram();
             $bot->setWebhook('https://mohajesmaili.ir/index.php/Telegram_Api/get_updates/');
+            redirect('http://t.me/IFTTTAI_bot');
 
         }
     }
@@ -40,11 +46,53 @@ class Telegram_Api extends CI_Controller
     {
         $bot=new Telegram();
         $result=$bot->getData();
-        $text = $result['message'] ['text'];
-        $chat_id = $result['message'] ['chat']['id'];
-        $content = array('chat_id' => $chat_id, 'text' => 'Test');
-        $bot->sendMessage($content);
-    }
+        $chat_id = $result['message']['chat']['id'];
+        //ob_start();
+        //var_dump($result);
+        //file_put_contents(__DIR__.'/data/Log.txt',ob_get_contents());
+        //die;
+        if($result['message']['text']=='/start'){
+            $file = fopen(__DIR__.'/data/Log.txt', "r");
+            $service_app_id=fgets($file);
+            $service_use_id=fgets($file);
+            fclose($file);
+            $text='به ربات IFTTT خوش آمدید';
+            $this->Home_model->update_user_service($service_use_id,null,$chat_id,$service_app_id);
+            $content = array('chat_id' => $chat_id, 'text' => $text);
+            $bot->sendMessage($content);
+        }elseif($result['message']['text']=="/getlast"){
+            $get_inf=$this->Home_model->show_service('',$chat_id);
+            if($get_inf[0]->app_1_id==$chat_id){
+                $service_app_id=2;
+            }else{
+                $service_app_id=1;
+            }
+            $service_use_id=$get_inf[0]->id;
+            $last_pic_url=file_get_contents("https://mohajesmaili.ir/index.php/instagram/get_signle_media/$service_app_id/$service_use_id");
+            //$img = curl_file_create($last_pic_url,'image/jpg');
+            $content = array('chat_id' => $chat_id, 'text' => $last_pic_url );
+            $bot->sendMessage($content);
+        }elseif($result['message']['text']=="/getall") {
+            $get_inf=$this->Home_model->show_service('',$chat_id);
+            if($get_inf[0]->app_1_id==$chat_id){
+                $service_app_id=2;
+            }else{
+                $service_app_id=1;
+            }
+            $service_use_id=$get_inf[0]->id;
+            $last_pic_url=file_get_contents("https://mohajesmaili.ir/index.php/instagram/get_media/$service_app_id/$service_use_id");
+            $last_pic_url = explode(',',$last_pic_url);
+            //$count=count($last_pic_url);
+            foreach ($last_pic_url as $all_url) {
+                $content = array('chat_id' => $chat_id, 'text' => $all_url);
+                $bot->sendMessage($content);
+            }
+        }else {
+            $text = "دستور ناشناخته";
+            $content = array('chat_id' => $chat_id, 'text' => $text);
+            $bot->sendMessage($content);
+        }
 
+    }
 }
 ?>
