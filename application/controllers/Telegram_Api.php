@@ -49,13 +49,37 @@ class Telegram_Api extends CI_Controller
         $chat_id = $result['message']['chat']['id'];
         //ob_start();
         //var_dump($result);
-        //file_put_contents(__DIR__.'/data/Log.txt',ob_get_contents());
+        //file_put_contents(__DIR__.'/Log.txt',ob_get_contents());
         //die;
+        $file = fopen(__DIR__.'/data/Log.txt', "r");
+        $service_app_id=fgets($file);
+        $service_use_id=fgets($file);
+        fclose($file);
+        $get_reply=$this->Home_model->show_service('',$chat_id,8);
+        if($get_reply[0]->app_1_id==$chat_id){
+            if($get_reply[0]->app_1_reply==1){
+
+            }
+        }elseif($get_reply[0]->app_2_id==$chat_id){
+            if($get_reply[0]->app_2_reply==1){
+                $file_id=$result['message']['photo']['0']['file_id'];
+                $link=APPPATH.'views/telegram_img/'.$chat_id.".jpg";
+
+                $file = $bot->getFile($file_id);
+                $bot->downloadFile($file['result']['file_path'],$link);
+                $text="فایل توسط virus scan در حال پردازش است";
+                $content = array('chat_id' => $chat_id, 'text' => $text);
+                $bot->sendMessage($content);
+                $test=$this->Home_model->update_user_service($service_use_id,null,$chat_id,$service_app_id,0);
+
+                $virus_scan=file_get_contents("https://mohajesmaili.ir/index.php/Virustotal/auth/".$link."");
+                $text="در نتیجه اسکن فایل به وسیله آنتی ویروس nod32 نتیجه".$virus_scan."برگشت داده شده است";
+                $content = array('chat_id' => $chat_id, 'text' => $text);
+                $bot->sendMessage($content);
+            }
+        }
+
         if($result['message']['text']=='/start'){
-            $file = fopen(__DIR__.'/data/Log.txt', "r");
-            $service_app_id=fgets($file);
-            $service_use_id=fgets($file);
-            fclose($file);
             $text='به ربات IFTTT خوش آمدید';
             $this->Home_model->update_user_service($service_use_id,null,$chat_id,$service_app_id);
             $content = array('chat_id' => $chat_id, 'text' => $text);
@@ -87,8 +111,9 @@ class Telegram_Api extends CI_Controller
                 $content = array('chat_id' => $chat_id, 'text' => $all_url);
                 $bot->sendMessage($content);
             }
-        }else {
-            $text = "دستور ناشناخته";
+        }elseif($result['message']['text']=="/scanfile"){
+            $test=$this->Home_model->update_user_service($service_use_id,null,$chat_id,$service_app_id,1);
+            $text = "لطفا فایل را ارسال نمایید:";
             $content = array('chat_id' => $chat_id, 'text' => $text);
             $bot->sendMessage($content);
         }

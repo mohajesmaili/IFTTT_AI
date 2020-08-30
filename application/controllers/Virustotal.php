@@ -35,11 +35,11 @@ class Virustotal extends CI_Controller
             }
         }
     }
-    public function auth(){
+    public function auth($file_link){
         $api_key='7d2df3e0ddd5cafe6f813439340013727b6ad459f2e9f30c9df46ac2e9543762';
         $data=array(
             'apikey'=>$api_key,
-            'file'=>base_url('css/index.php')
+            'file'=>$file_link,
         );
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://www.virustotal.com/vtapi/v2/file/scan");
@@ -53,7 +53,6 @@ class Virustotal extends CI_Controller
         $get_result_file=file_get_contents("https://www.virustotal.com/vtapi/v2/file/report?apikey=".$api_key."&resource=".$resource_id."");
         $get_result_file = json_decode($get_result_file, true);
         var_dump($get_result_file['scans']['ESET-NOD32']['detected']);
-        var_dump($get_result_file['scans']['Kaspersky']['detected']);
     }
 }
 ?>
